@@ -7,12 +7,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-first:
-  name: First quote
-
-second:
-  name: Second quote
-
-third:
-  name: Third quote
+class Quote < ApplicationRecord
+  validates :name, presence: true
+end

@@ -7,12 +7,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+require "test_helper"
 
-first:
-  name: First quote
-
-second:
-  name: Second quote
-
-third:
-  name: Third quote
+class QuoteTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
