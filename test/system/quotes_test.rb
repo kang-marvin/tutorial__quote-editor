@@ -6,17 +6,17 @@ class QuotesTest < ApplicationSystemTestCase
     @quote = quotes(:first)
   end
 
-  test "visiting the index" do
-    visit quotes_url
+  test "listing qoutes" do
+    visit quotes_path
 
     assert_selector "h1", text: "Quotes"
   end
 
-  test "Creating a new quote" do
+  test "creating a new quote" do
     visit quotes_path
 
     click_on "New Quote"
-    assert_selector "h1", text: "New Quote"
+    assert_selector "h1", text: "New quote"
 
     fill_in "Name", with: "Capybara Quote"
     click_on "Create quote"
@@ -25,7 +25,7 @@ class QuotesTest < ApplicationSystemTestCase
     assert_text "Capybara Quote"
   end
 
-  test "Showing a quote" do
+  test "showing a quote" do
     visit quotes_path
 
     click_link @quote.name
@@ -33,11 +33,11 @@ class QuotesTest < ApplicationSystemTestCase
     assert_selector "h1", text: @quote.name
   end
 
-  test "Updating a quote" do
+  test "updating a quote" do
     visit quotes_path
 
     click_on "Edit", match: :first
-    assert_selector "h1", text: "Edit Quote"
+    assert_selector "h1", text: "Edit quote"
 
     fill_in "Name", with: "#{@quote.name} Updated!"
     click_on "Update quote"
@@ -47,7 +47,7 @@ class QuotesTest < ApplicationSystemTestCase
   end
 
 
-  test "Destroying a quote" do
+  test "destroying a quote" do
     visit quotes_path
 
     assert_text @quote.name
@@ -55,6 +55,4 @@ class QuotesTest < ApplicationSystemTestCase
 
     assert_no_text @quote.name
   end
-
-
 end
