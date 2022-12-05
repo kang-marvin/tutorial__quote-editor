@@ -1,0 +1,15 @@
+
+<div>
+  <%= link_to quote.name, quote_path(quote) %>
+
+  <div>
+    <%= link_to "Edit",
+                edit_quote_path(quote),
+                class: "" %>
+
+    <%= button_to "Delete",
+                  quote_path(quote),
+                  method: :delete,
+                  class: "" %>
+  </div>
+</div>

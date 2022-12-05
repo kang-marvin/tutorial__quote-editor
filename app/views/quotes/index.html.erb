@@ -1,0 +1,10 @@
+
+<main>
+  <div>
+    <h1>Quotes</h1>
+
+    <%= link_to "New Quote", new_quote_path, class: "" %>
+  </div>
+
+  <%= render partial: "quote", collection: @quotes %>
+</main>

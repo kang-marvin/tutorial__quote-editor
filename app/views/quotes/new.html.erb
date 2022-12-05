@@ -1,0 +1,9 @@
+<main>
+  <%= link_to sanitize("&#11104; Back to quotes"), quotes_path %>
+
+  <div>
+    <h1>New quote</h1>
+  </div>
+
+  <%= render partial: "form", locals: { quote: @quote } %>
+</main>
