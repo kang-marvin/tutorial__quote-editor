@@ -1,16 +1,18 @@
 
-<div>
-  <%= link_to quote.name, quote_path(quote) %>
-  <%= quote.verification_badge %>
-
+<%= turbo_frame_tag quote do %>
   <div>
-    <%= link_to "Edit",
-                edit_quote_path(quote),
-                class: "" %>
+    <%= link_to quote.name, quote_path(quote) %>
+    <%= quote.verification_badge %>
 
-    <%= button_to "Delete",
-                  quote_path(quote),
-                  method: :delete,
+    <div>
+      <%= link_to "Edit",
+                  edit_quote_path(quote),
                   class: "" %>
+
+      <%= button_to "Delete",
+                    quote_path(quote),
+                    method: :delete,
+                    class: "" %>
+    </div>
   </div>
-</div>
+<% end %>
