@@ -4,15 +4,19 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string
+#  verified   :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 first:
   name: First quote
+  verified: false
 
 second:
   name: Second quote
+  verified: false
 
 third:
   name: Third quote
+  verified: false

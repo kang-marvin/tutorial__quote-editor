@@ -6,7 +6,7 @@ class QuotesTest < ApplicationSystemTestCase
     @quote = quotes(:first)
   end
 
-  test "listing qoutes" do
+  test "listing quotes" do
     visit quotes_path
 
     assert_selector "h1", text: "Quotes"
@@ -19,10 +19,13 @@ class QuotesTest < ApplicationSystemTestCase
     assert_selector "h1", text: "New quote"
 
     fill_in "Name", with: "Capybara Quote"
+    check "Verified"
+
     click_on "Create quote"
 
     assert_selector "h1", text: "Quotes"
     assert_text "Capybara Quote"
+    assert_text Quote::OFFICIAL_BADGE
   end
 
   test "showing a quote" do
@@ -31,6 +34,7 @@ class QuotesTest < ApplicationSystemTestCase
     click_link @quote.name
 
     assert_selector "h1", text: @quote.name
+    assert_no_text Quote::OFFICIAL_BADGE
   end
 
   test "updating a quote" do
@@ -40,10 +44,13 @@ class QuotesTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Edit quote"
 
     fill_in "Name", with: "#{@quote.name} Updated!"
+    check "Verified"
+
     click_on "Update quote"
 
     assert_selector "h1", text: "Quotes"
     assert_text "#{@quote.name} Updated!"
+    assert_text Quote::OFFICIAL_BADGE
   end
 
 
