@@ -53,7 +53,6 @@ class QuotesTest < ApplicationSystemTestCase
     assert_text Quote::OFFICIAL_BADGE
   end
 
-
   test "destroying a quote" do
     visit quotes_path
 
@@ -61,5 +60,18 @@ class QuotesTest < ApplicationSystemTestCase
     click_on "Delete", match: :first
 
     assert_no_text @quote.name
+  end
+
+  test "raise error for invalid data" do
+    visit quotes_path
+
+    click_on "New Quote"
+
+    fill_in "Name", with: ""
+    check "Verified"
+
+    click_on "Create quote"
+
+    page.has_css?('.error')
   end
 end
