@@ -18,7 +18,11 @@ class QuotesController < ApplicationController
       render :new, status: :unprocessable_entity and return
     end
 
-    redirect_to quotes_path, notice: "Quote created successful"
+    respond_to do |format|
+      format.html { redirect_to quotes_path, notice: "Quote created successful" }
+      format.turbo_stream
+    end
+
   end
 
   def edit

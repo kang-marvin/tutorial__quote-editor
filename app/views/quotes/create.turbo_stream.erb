@@ -1,0 +1,4 @@
+<%# We are using update so that we can create other new quotes %>
+
+<%= turbo_stream.prepend "quotes", partial: "quotes/quote", locals: { quote: @quote } %>
+<%= turbo_stream.update Quote.new, "" %>

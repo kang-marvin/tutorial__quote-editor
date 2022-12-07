@@ -3,8 +3,15 @@
   <div>
     <h1>Quotes</h1>
 
-    <%= link_to "New Quote", new_quote_path, class: "" %>
+    <%= link_to "New Quote",
+                new_quote_path,
+                class: "",
+                data: { turbo_frame: dom_id(Quote.new) } %>
   </div>
 
-  <%= render partial: "quote", collection: @quotes %>
+  <%= turbo_frame_tag Quote.new %>
+
+  <%= turbo_frame_tag "quotes" do %>
+    <%= render partial: "quote", collection: @quotes %>
+  <% end %>
 </main>
