@@ -3,6 +3,7 @@ require "application_system_test_case"
 class QuotesTest < ApplicationSystemTestCase
 
   setup do
+    login_as users(:accountant)
     @quote = quotes(:first)
   end
 
@@ -16,7 +17,6 @@ class QuotesTest < ApplicationSystemTestCase
     visit quotes_path
 
     click_on "New Quote"
-    assert_selector "h1", text: "New quote"
 
     fill_in "Name", with: "Capybara Quote"
     check "Verified"
@@ -41,7 +41,6 @@ class QuotesTest < ApplicationSystemTestCase
     visit quotes_path
 
     click_on "Edit", match: :first
-    assert_selector "h1", text: "Edit quote"
 
     fill_in "Name", with: "#{@quote.name} Updated!"
     check "Verified"

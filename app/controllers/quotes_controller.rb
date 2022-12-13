@@ -2,18 +2,18 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :update, :destroy]
 
   def index
-    @quotes = Quote.all
+    @quotes = current_company.quotes
   end
 
   def show
   end
 
   def new
-    @quote = Quote.new
+    @quote = Quote.new(company: current_company)
   end
 
   def create
-    @quote = Quote.new(quote_params)
+    @quote = current_company.quotes.new(quote_params)
     unless @quote.save
       render :new, status: :unprocessable_entity and return
     end
@@ -47,7 +47,7 @@ class QuotesController < ApplicationController
   private
 
   def set_quote
-    @quote = Quote.find_by(id: params[:id])
+    @quote = current_company.quotes.find_by(id: params[:id])
   end
 
   def quote_params
