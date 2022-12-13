@@ -33,20 +33,26 @@ class Quote < ApplicationRecord
   end
 
   def broadcast_created_quote
-    broadcast_prepend_to "quotes",
+    broadcast_prepend_to broadcast_channel_name,
                          partial: "quotes/quote",
                          locals: { quote: self },
                          target: "quotes"
   end
 
   def broadcast_changed_quote
-    broadcast_replace_to "quotes",
+    broadcast_replace_to broadcast_channel_name,
                          partial: "quotes/quote",
                          locals: { quote: self },
                          target: self
   end
 
   def broadcast_removed_quote
-    broadcast_remove_to "quotes", target: self
+    broadcast_remove_to broadcast_channel_name, target: self
+  end
+
+  private
+
+  def broadcast_channel_name
+    [self.company, "quotes"]
   end
 end
