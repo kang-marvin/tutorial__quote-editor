@@ -30,4 +30,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :validatable
 
   belongs_to :company
+
+  def name
+    email.split('@').first.titleize
+  end
 end
