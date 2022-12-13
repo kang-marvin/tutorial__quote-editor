@@ -11,7 +11,9 @@
 class Quote < ApplicationRecord
   validates :name, presence: true
 
-  after_create_commit :broadcast_change_to_subscribers
+  after_create_commit :broadcast_created_quote
+  after_update_commit :broadcast_changed_quote
+  after_destroy_commit :broadcast_removed_quote
 
   OFFICIAL_BADGE = "Blue tick"
 
@@ -19,10 +21,21 @@ class Quote < ApplicationRecord
     verified ? OFFICIAL_BADGE : ""
   end
 
-  def broadcast_change_to_subscribers
+  def broadcast_created_quote
     broadcast_prepend_to "quotes",
                          partial: "quotes/quote",
                          locals: { quote: self },
                          target: "quotes"
+  end
+
+  def broadcast_changed_quote
+    broadcast_replace_to "quotes",
+                         partial: "quotes/quote",
+                         locals: { quote: self },
+                         target: self
+  end
+
+  def broadcast_removed_quote
+    broadcast_remove_to "quotes", target: self
   end
 end
