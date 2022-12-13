@@ -11,9 +11,18 @@
 class Quote < ApplicationRecord
   validates :name, presence: true
 
+  after_create_commit :broadcast_change_to_subscribers
+
   OFFICIAL_BADGE = "Blue tick"
 
   def verification_badge
     verified ? OFFICIAL_BADGE : ""
+  end
+
+  def broadcast_change_to_subscribers
+    broadcast_prepend_to "quotes",
+                         partial: "quotes/quote",
+                         locals: { quote: self },
+                         target: "quotes"
   end
 end
