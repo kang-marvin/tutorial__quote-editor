@@ -7,16 +7,28 @@
 #  verified   :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  company_id :bigint           not null
+#
+# Indexes
+#
+#  index_quotes_on_company_id  (company_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (company_id => companies.id)
 #
 
 first:
+  company: kpmg
   name: First quote
   verified: false
 
 second:
+  company: kpmg
   name: Second quote
   verified: false
 
 third:
+  company: kpmg
   name: Third quote
   verified: false
