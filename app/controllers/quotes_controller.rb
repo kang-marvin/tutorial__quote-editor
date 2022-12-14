@@ -18,9 +18,11 @@ class QuotesController < ApplicationController
       render :new, status: :unprocessable_entity and return
     end
 
+    flash_message = "Quote was successfully created."
+
     respond_to do |format|
-      format.html { redirect_to quotes_path, notice: "Quote created successful" }
-      format.turbo_stream
+      format.html { redirect_to quotes_path, notice: flash_message }
+      format.turbo_stream { flash.now[:notice] = flash_message }
     end
 
   end
@@ -32,15 +34,24 @@ class QuotesController < ApplicationController
     unless @quote.update(quote_params)
       render :edit, status: :unprocessable_entity and return
     end
-    redirect_to quotes_path, notice: "Quote updated successful"
+
+    flash_message = "Quote updated successful"
+
+    respond_to do |format|
+      format.html { redirect_to quotes_path, notice: flash_message }
+      format.turbo_stream { flash.now[:notice] = flash_message }
+    end
+
   end
 
   def destroy
     @quote.destroy
 
+    flash_message = "Quote destroyed successful"
+
     respond_to do |format|
-      format.html { redirect_to quotes_path, notice: "Quote destroyed successful" }
-      format.turbo_stream
+      format.html { redirect_to quotes_path, notice: flash_message }
+      format.turbo_stream { flash.now[:notice] = flash_message }
     end
   end
 
