@@ -7,6 +7,10 @@ module ApplicationHelper
     "#{submit_type} #{model_class_name(obj)}"
   end
 
+  def render_turbo_stream_flash_messages
+    turbo_stream.prepend "flash", partial: "layouts/flash"
+  end
+
   private
 
   def model_class_name(obj)
